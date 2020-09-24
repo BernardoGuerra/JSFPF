@@ -44,7 +44,20 @@ public class ActualizarUsuario implements Serializable{
 	
 	@Email(message = "El formato del correo es incorrecto")
 	private String email;
+
+	@Email(message = "El formato del correo es incorrecto")
+	private String emailBusqueda;
 	
+	
+	public String getEmailBusqueda() {
+		return emailBusqueda;
+	}
+
+
+	public void setEmailBusqueda(String emailBusqueda) {
+		this.emailBusqueda = emailBusqueda;
+	}
+
 	private String estadoUsuario;
 	
 	private String rolUsuairo;
@@ -73,7 +86,6 @@ public class ActualizarUsuario implements Serializable{
 	    	FacesContext fc = FacesContext.getCurrentInstance();	
 			if(!fc.getExternalContext().getRequestParameterMap().isEmpty()) {
 				String email= fc.getExternalContext().getRequestParameterMap().get("userEmail");
-				System.out.println("HOLA ENTTRE " + email );
 				try {
 					UsuarioDTO us = usuarioEJB.obtenerUsuarioEmail(email);
 					this.id_usuario = us.getId_usuario();
@@ -216,7 +228,6 @@ public class ActualizarUsuario implements Serializable{
 	public String actulizarUsuario() {
 		
 		UsuarioDTO usuario = new UsuarioDTO();
-		System.out.println("ID USUARIO: " + this.getId_usuario());
 		usuario.setId_usuario(this.getId_usuario());
 		usuario.setEmail(this.getEmail());
 		usuario.setUsername(this.getUserName());
@@ -244,7 +255,7 @@ public class ActualizarUsuario implements Serializable{
 	        return " ";
 		}
 		//POST-Redirect-GET 
-		return "/actualizarusuario.xhtml?faces-redirect=true?i=1";
+		return "/actualizarusuario.xhtml?faces-redirect=true";
 		
 	}
 }

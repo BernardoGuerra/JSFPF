@@ -36,9 +36,13 @@ public class EliminarUsuario implements Serializable{
 	private String email;
 	
 	private String estadoUsuario;
+	
+	private String emailBusqueda;
 
 	
 	
+
+
 	public void initConversation(){
 	    if (!FacesContext.getCurrentInstance().isPostback() ) {
 	    	FacesContext fc = FacesContext.getCurrentInstance();	
@@ -63,6 +67,16 @@ public class EliminarUsuario implements Serializable{
 	    }
 	}
 	
+	
+	public String getEmailBusqueda() {
+		return emailBusqueda;
+	}
+
+
+	public void setEmailBusqueda(String emailBusqueda) {
+		this.emailBusqueda = emailBusqueda;
+	}
+
 
 	public GestionUsuarioBean getUsuarioEJB() {
 		return usuarioEJB;
@@ -123,29 +137,36 @@ public class EliminarUsuario implements Serializable{
 	
 	
 	public String busquedaPorCorreo() {
-		return "/eliminarusuario.xhtml?faces-redirect=true&userEmail=" + this.getEmail();
+		return "/eliminarusuario.xhtml?faces-redirect=true&userEmail=" + this.getEmailBusqueda();
 	}
 	
 	
 	public String eliminar() {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
-		
-		try {
-			usuarioEJB.bajaLogicaUsuario(this.email);;
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "EL Usuario fue Deshabilitado", "OK");
+		String redirect = "/eliminarusuario.xhtml?faces-redirect=true";
+		if(!this.email.isEmpty()) {
+			try {
+				usuarioEJB.bajaLogicaUsuario(this.email);;
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "EL Usuario fue Deshabilitado", "OK");
+				context.addMessage("", message);
+				context.getExternalContext().getFlash().setKeepMessages(true);
+				        
+			} catch (ServiciosException e) {
+				
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "ERROR");
+				context.addMessage("", message);
+				context.getExternalContext().getFlash().setKeepMessages(true);
+		        return " ";
+			}
+			//POST-Redirect-GET 
+			return redirect;
+		}else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Debe buscar un usuario");
 			context.addMessage("", message);
 			context.getExternalContext().getFlash().setKeepMessages(true);
-			        
-		} catch (ServiciosException e) {
-			
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "ERROR");
-			context.addMessage("", message);
-			context.getExternalContext().getFlash().setKeepMessages(true);
-	        return " ";
+			return " ";
 		}
-		//POST-Redirect-GET 
-		return "/eliminarusuario.xhtml?faces-redirect=true";
 		
 	}
 }

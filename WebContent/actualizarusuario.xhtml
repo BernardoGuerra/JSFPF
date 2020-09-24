@@ -38,7 +38,7 @@
         
         <h:panelGrid columns="3" cellpadding="5">
             <p:outputLabel for="email_buscar" value="Email:" />
-            <p:inputText id="email_buscar" value="#{actualizarusuario.email}" required="true" label="Firstname">
+            <p:inputText id="email_buscar" value="#{actualizarusuario.emailBusqueda}" required="true" label="Firstname">
                 <f:validateBean />
             </p:inputText>
             <p:message for="email_buscar"  />
@@ -63,7 +63,7 @@
             	  
             	  <div style="padding: 10px;">
                     <p:outputLabel value="ID" style="font-weight: bold;" />
-                    <p:inputText id="id_usuario" value="#{actualizarusuario.id_usuario}"  style="width: 100%;" readonly= "#{facesContext.renderResponse}" />
+                    <p:inputText id="id_usuario" required="true" value="#{actualizarusuario.id_usuario}"  style="width: 100%;" readonly= "#{facesContext.renderResponse}" />
                     <p:message for="@previous" />
                 </div>
             	
