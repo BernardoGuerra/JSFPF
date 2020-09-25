@@ -187,7 +187,7 @@ public class CrearUsuario implements Serializable {
 		}
 		
 		//POST-Redirect-GET 
-		return "/crearusuario.xhtml?faces-redirect=true?i=1";
+		return "/pages/crearusuario.xhtml?faces-redirect=true?i=1";
 
 	}
 	

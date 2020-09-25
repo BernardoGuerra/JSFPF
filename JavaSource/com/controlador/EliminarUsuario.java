@@ -144,7 +144,7 @@ public class EliminarUsuario implements Serializable{
 	public String eliminar() {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
-		String redirect = "/eliminarusuario.xhtml?faces-redirect=true";
+		String redirect = "/pages/eliminarusuario.xhtml?faces-redirect=true";
 		if(!this.email.isEmpty()) {
 			try {
 				usuarioEJB.bajaLogicaUsuario(this.email);;
@@ -160,7 +160,7 @@ public class EliminarUsuario implements Serializable{
 		        return " ";
 			}
 			//POST-Redirect-GET 
-			return redirect;
+			//return redirect;
 		}else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Debe buscar un usuario");
 			context.addMessage("", message);
@@ -168,5 +168,6 @@ public class EliminarUsuario implements Serializable{
 			return " ";
 		}
 		
+		return redirect;
 	}
 }

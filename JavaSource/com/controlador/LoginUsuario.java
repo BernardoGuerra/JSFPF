@@ -1,6 +1,8 @@
 package com.controlador;
 
 
+import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.validation.constraints.Email;
@@ -8,7 +10,9 @@ import javax.validation.constraints.Size;
 
 @Named("loginusuario")
 @SessionScoped
-public class LoginUsuario {
+public class LoginUsuario implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Email
 	private String email;
