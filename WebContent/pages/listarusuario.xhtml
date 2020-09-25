@@ -1,0 +1,63 @@
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui">
+	
+    <h:head> </h:head>
+
+    <h:body style="margin: 0px;">
+        <p:tabMenu activeIndex="0">
+            <p:menuitem value="Inicio" outcome="listarusuario">
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Crear Usuario" outcome="crearusuario">
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="Actualizar Usuario" outcome="actualizarusuario">
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="Eliminar Usuario" outcome="eliminarusuario">
+                <f:param name="i" value="3" />
+            </p:menuitem>
+        </p:tabMenu>
+
+        <br />
+
+        <div style="padding: 5px; width: 97%; margin: 0 auto;" >
+            <p:dataTable id="data" var="item" value="#{listarusuarios.listaUsuarios}" 
+            rowKey="#{item.id_usuario}" emptyMessage="No hay usuarios disponibles" paginator="true" rows="12" >
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{item.nombre}" />
+                </p:column>
+
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{item.apellido}" />
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{item.email}" />
+                </p:column>
+
+                <p:column headerText="Rol">
+                    <h:outputText value="#{item.rol}" />
+                </p:column>
+
+                <p:column headerText="Estado">
+                    <h:outputText value="#{item.estadoUsuario}" />
+                </p:column>
+
+                <p:column headerText="Acciones" style="text-align: center;">
+                    <p:button icon="ui-icon-delete" value="E" outcome="eliminarusuario">
+                        <f:param name="userEmail" value="#{item.email}" />
+                    </p:button>
+                    <p:spacer width="10" />
+                    <p:button icon="ui-icon-update" value="A" outcome="actualizarusuario">
+                        <f:param name="userEmail" value="#{item.email}" />
+                    </p:button>
+                    
+                </p:column>
+            </p:dataTable>
+        </div>
+    </h:body>
+</html>
