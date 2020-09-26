@@ -255,7 +255,7 @@ public class ActualizarUsuario implements Serializable{
 	        return " ";
 		}
 		//POST-Redirect-GET 
-		return "/actualizarusuario.xhtml?faces-redirect=true";
+		return "/pages/actualizarusuario.xhtml?faces-redirect=true";
 		
 	}
 }

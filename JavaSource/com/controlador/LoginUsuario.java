@@ -3,7 +3,7 @@ package com.controlador;
 
 import java.io.Serializable;
 
-import javax.ejb.EJB;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -17,6 +17,7 @@ import com.negocio.GestionUsuarioBean;
 @SessionScoped
 public class LoginUsuario implements Serializable{
 
+
 	/**
 	 * 
 	 */
@@ -25,6 +26,7 @@ public class LoginUsuario implements Serializable{
 	
 	@EJB
 	private GestionUsuarioBean persistenciaUsuario;
+
 
 	@Email
 	private String email;
