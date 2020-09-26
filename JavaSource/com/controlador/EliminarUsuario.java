@@ -159,8 +159,7 @@ public class EliminarUsuario implements Serializable{
 				context.getExternalContext().getFlash().setKeepMessages(true);
 		        return " ";
 			}
-			//POST-Redirect-GET 
-			return redirect;
+			
 		}else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO", "Debe buscar un usuario");
 			context.addMessage("", message);
@@ -168,5 +167,7 @@ public class EliminarUsuario implements Serializable{
 			return " ";
 		}
 		
+		//POST-Redirect-GET 
+		return redirect;
 	}
 }

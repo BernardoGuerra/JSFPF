@@ -1,14 +1,30 @@
 package com.controlador;
 
 
+import java.io.Serializable;
+
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+import com.dto.UsuarioDTO;
+import com.negocio.GestionUsuarioBean;
+
 @Named("loginusuario")
 @SessionScoped
-public class LoginUsuario {
+public class LoginUsuario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	@EJB
+	private GestionUsuarioBean persistenciaUsuario;
 
 	@Email
 	private String email;
@@ -34,6 +50,12 @@ public class LoginUsuario {
 	
 	
 	public String validarUsuario() {
+		UsuarioDTO u = new UsuarioDTO();
+		
+		
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		fc.getExternalContext().getRequestMap().put("Usuairo", u);
 		return "";
 	}
 	
