@@ -1,0 +1,59 @@
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui">
+	
+    <h:head> </h:head>
+
+    <h:body style="margin: 0px;">
+        <p:tabMenu activeIndex="0">
+            <p:menuitem value="Inicio" outcome="listarFenomeno">
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Crear Fenomeno" outcome="altaFenomeno">
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="Actualizar Fenomeno" outcome="modificarFenomeno">
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="Eliminar Fenomeno" outcome="eliminarFenomeno">
+                <f:param name="i" value="3" />
+            </p:menuitem>
+        </p:tabMenu>
+
+        <br />
+
+        <div style="padding: 5px; width: 97%; margin: 0 auto;" >
+            <p:dataTable id="data" var="item" value="#{listarfenomenos.listafenomenos}" 
+            rowKey="#{item.codigo}" emptyMessage="No hay fenomenos disponibles" paginator="true" rows="12" >
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{item.codigo}" />
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{item.nombre}" />
+                </p:column>
+
+                <p:column headerText="Descripcion">
+                    <h:outputText value="#{item.descripcion}" />
+                </p:column>
+
+                <p:column headerText="Telefono de Emergencia">
+                    <h:outputText value="#{item.telefono}" />
+                </p:column>
+
+                <p:column headerText="Acciones" style="text-align: center;">
+                    <p:button icon="ui-icon-delete" value="E" outcome="eliminarFenomeno">
+                        <f:param name="codigo" value="#{item.codigo}" />
+                    </p:button>
+                    <p:spacer width="10" />
+                    <p:button icon="ui-icon-update" value="A" outcome="modificarFenomeno">
+                        <f:param name="codigo" value="#{item.codigo}" />
+                    </p:button>
+                    
+                </p:column>
+            </p:dataTable>
+        </div>
+    </h:body>
+</html>
