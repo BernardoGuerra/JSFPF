@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" > 
+
+<h:head></h:head> 
+	
+	<f:metadata>
+    <f:event listener="#{modificarfenomeno.initConversation}" type="preRenderView" /> 
+	</f:metadata>
+	
+	   <h:body style="margin: 0px;">
+       
+ 
+        <p:tabMenu activeIndex="2">
+        
+            <p:menuitem value="Inicio" outcome="listarfenomeno" >
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Crear Fenomeno" outcome="altafenomeno" >
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="Modificar Fenomeno" outcome="modificarfenomeno" >
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="Eliminar Fenomeno" outcome="eliminarFenomeno" >
+                <f:param name="i" value="3" />
+            </p:menuitem>
+            
+        </p:tabMenu>
+	<br/>
+	
+<h:form>
+<div style="padding: 5px; width: 98%; margin: 0 auto;">
+    <p:panel id="panel" header="Busqueda por codigo">
+        
+        <h:panelGrid columns="3" cellpadding="5">
+            <p:outputLabel for="codigo a busacar" value="Codigo:" />
+            <p:inputText id="codigo" value="#{modificarfenomeno.codigoBusqueda}" required="true" label="Codigo">
+                <f:validateBean />
+            </p:inputText>
+            <p:message for="codigor"  />
+        </h:panelGrid>
+        <p:commandButton value="Buscar" update="panel" action="#{modificarfenomeno.busquedaPorCodigo}" icon="pi pi-check" />
+    </p:panel>
+   </div> 
+</h:form>
+			
+	<br/>
+	
+        
+        	<h:form>
+            <div style="padding: 5px; width: 98%; margin: 0 auto;">
+            
+            	
+            	<p:panel id="basic" header="Formulario" footer="Chaja" style="margin: 0 auto">
+            
+           		 <p:growl id="messages" showDetail="true"/>	
+            	
+            	  <p:messages />
+            	  
+            	  <div style="padding: 10px;">
+                    <p:outputLabel value="ID" style="font-weight: bold;" />
+                    <p:inputText id="codigo" required="true" value="#{modificarfenomeno.codigo}"  style="width: 100%;" readonly= "#{facesContext.renderResponse}" />
+                    <p:message for="@previous" />
+                </div>
+            	
+            	
+                <div style="padding: 10px;">
+                    <p:outputLabel value="Codigo: " style="font-weight: bold;" />
+                    <p:inputText id="codigo" value="#{modificarfenomeno.codigo}"  style="width: 100%;" />
+                    <p:message for="@previous" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <p:outputLabel value="Nombre: " style="font-weight: bold;" />
+                    <p:inputText value="#{modificarfenomeno.nombre}"  style="width: 100%;" />
+                    <p:message for="@previous" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <p:outputLabel value="Descripcion: " style="font-weight: bold;" />
+                    <p:inputText style="width: 100%;" value="#{modificarfenomeno.descripcion}" />
+                    <p:message for="@previous" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <p:outputLabel value="Telefono de Emergencia: " style="font-weight: bold;" />
+                    <p:inputText style="width: 100%;"  value="#{modificarfenomeno.telefono}" />
+                    <p:message for="@previous" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <p:commandButton value="Actualizar"  update="messages" ajax="false" validateClient="true" action="#{modificarfenomeno.modificarFenomeno}" style="width: 100%;" />
+                    <p:spacer width="10" />
+                    <p:button value="Cancelar" style="width: 100%;" />
+                </div>
+            
+            
+            </p:panel>
+            </div>
+                       
+           </h:form> 
+  
+    </h:body>
+
+</html>

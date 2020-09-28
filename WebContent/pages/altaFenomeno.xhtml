@@ -1,0 +1,78 @@
+<html
+
+	xmlns="http://www.w3.org/1999/xhtml" 	
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head> </h:head>
+    <h:body style="margin: 0px;">
+   
+        <p:tabMenu activeIndex="1">
+        
+            <p:menuitem value="Inicio" outcome="listarFenomeno" >
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Alta Fenomeno" outcome="altaFenomeno" >
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="Modificar Fenomeno" outcome="modificarFenomeno" >
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="Eliminar Fenomeno" outcome="eliminarFenomeno" >
+                <f:param name="i" value="3" />
+            </p:menuitem>
+            
+        </p:tabMenu>
+  
+        	<h:form>
+            <div style="padding: 5px; width: 98%; margin: 0 auto;">
+            
+           		 <p:growl id="messages" showDetail="true"/>	
+           		 <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+            	
+            	  <p:messages />
+            	<br/>
+            	<p:panel id="toggleable" header="Alta de Fenomeno" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+ 				
+        			<p:ajax event="close" listener="#{panelView.onClose}" update="msgs" />
+        			<p:ajax event="toggle" listener="#{panelView.onToggle}" update="msgs" />
+            	
+                <div style="padding: 10px;">
+                    <p:outputLabel value="codigo: " style="font-weight: bold;" />
+                    <p:inputText id="codigo" value="#{altafenomeno.codigo}"  style="width: 100%;" />
+                    <p:message for="@previous" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <p:outputLabel value="Nombre: " style="font-weight: bold;" />
+                    <p:inputText value="#{altafenomeno.nombre}"  style="width: 100%;" />
+                    <p:message for="@previous" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <p:outputLabel value="Descripcion: " style="font-weight: bold;" />
+                    <p:inputText style="width: 100%;" value="#{altafenomeno.descripcion}" />
+                    <p:message for="@previous" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <p:outputLabel value="Telefono Emergencia: " style="font-weight: bold;" />
+                    <p:inputText style="width: 100%;"  value="#{altafenomeno.telefono}" />
+                    <p:message for="@previous" />
+                </div>
+				
+			
+				</p:panel>
+				
+                <div style="padding: 10px;">
+                    <p:commandButton value="Alta Fenomeno"  update="messages" ajax="false" validateClient="true" action="#{altafenomeno.crearFenomeno}" style="width: 100%;" />
+                    <p:spacer width="10" />
+                    <p:button value="Cancelar" style="width: 100%;" />
+                </div>
+   
+            </div>
+           </h:form> 
+   
+    </h:body>
+</html>
