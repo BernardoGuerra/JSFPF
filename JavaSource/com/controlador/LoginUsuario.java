@@ -2,6 +2,7 @@ package com.controlador;
 
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -11,6 +12,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 import com.dto.UsuarioDTO;
+import com.enumerados.EnumCategoriaUsuario;
+import com.enumerados.EnumEstadoUsuario;
+import com.exception.ServiciosException;
 import com.negocio.GestionUsuarioBean;
 
 @Named("loginusuario")
@@ -52,13 +56,27 @@ public class LoginUsuario implements Serializable{
 	
 	
 	public String validarUsuario() {
+		
 		UsuarioDTO u = new UsuarioDTO();
-		
-		
-		
 		FacesContext fc = FacesContext.getCurrentInstance();
-		fc.getExternalContext().getRequestMap().put("Usuairo", u);
-		return "";
+		String redirect = " ";
+
+		try {
+			u = persistenciaUsuario.validarUsuario(this.email, this.password);
+		} catch (NoSuchAlgorithmException | ServiciosException e) {
+			e.printStackTrace();
+		}
+		
+		if(u != null && u.getEstadoUsuario().equals(EnumEstadoUsuario.HABILITADO.toString())) {
+			
+			fc.getExternalContext().getRequestMap().put("usuario", u);
+			if(u.getRol().equals(EnumCategoriaUsuario.ADMINISTRADOR.toString())) redirect = "";
+			if(u.getRol().equals(EnumCategoriaUsuario.EXPERTO.toString())) redirect = "";
+			if(u.getRol().equals(EnumCategoriaUsuario.VOLUNTARIO.toString())) redirect = "";
+			
+		}
+		
+		return redirect;
 	}
 	
 	

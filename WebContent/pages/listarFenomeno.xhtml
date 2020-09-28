@@ -25,7 +25,7 @@
         <br />
 
         <div style="padding: 5px; width: 97%; margin: 0 auto;" >
-            <p:dataTable id="data" var="item" value="#{listarfenomenos.listafenomenos}" 
+            <p:dataTable id="data" var="item" value="#{listarfenomenos.listaFenomenos}" 
             rowKey="#{item.codigo}" emptyMessage="No hay fenomenos disponibles" paginator="true" rows="12" >
                 <p:column headerText="Codigo">
                     <h:outputText value="#{item.codigo}" />
@@ -45,11 +45,11 @@
 
                 <p:column headerText="Acciones" style="text-align: center;">
                     <p:button icon="ui-icon-delete" value="E" outcome="eliminarFenomeno">
-                        <f:param name="codigo" value="#{item.codigo}" />
+                        <f:param name="nombre" value="#{item.nombre}" />
                     </p:button>
                     <p:spacer width="10" />
                     <p:button icon="ui-icon-update" value="A" outcome="modificarFenomeno">
-                        <f:param name="codigo" value="#{item.codigo}" />
+                        <f:param name="nombre" value="#{item.nombre}" />
                     </p:button>
                     
                 </p:column>

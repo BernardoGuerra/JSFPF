@@ -1,6 +1,6 @@
 package com.controlador;
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -22,6 +22,11 @@ public class ModificarFenomeno implements Serializable{
 	@EJB
 	private GestionFenomenoBean fenomenoEJB;
 	
+
+
+	@Size(min=2,max=40, message = "El codigo debe contener entre 2 y 40 caracteres.")
+	private String codigoBusqueda;
+	
 	@Size(min=2,max=40, message = "El codigo debe contener entre 2 y 40 caracteres.")
 	private String codigo;
 	
@@ -40,13 +45,16 @@ public class ModificarFenomeno implements Serializable{
 	    if (!FacesContext.getCurrentInstance().isPostback() ) {
 	    	FacesContext fc = FacesContext.getCurrentInstance();	
 			if(!fc.getExternalContext().getRequestParameterMap().isEmpty()) {
-				String codigo= fc.getExternalContext().getRequestParameterMap().get("codigo");
+				String nombreFenomeno= fc.getExternalContext().getRequestParameterMap().get("nombre");
 				try {
-					FenomenoDTO fs = (FenomenoDTO) fenomenoEJB.obtenerFenomenos();
-					this.codigo = fs.getCodigo();
-					this.nombre = fs.getNombre();
-					this.descripcion = fs.getDescripcion();
-					this.telefono = fs.getTelefono();
+					FenomenoDTO fs = fenomenoEJB.obtenerFenomenoNombre(nombreFenomeno);
+					if(fs != null) {
+						this.codigo = fs.getCodigo();
+						this.nombre = fs.getNombre();
+						this.descripcion = fs.getDescripcion();
+						this.telefono = fs.getTelefono();
+					}
+					
 				} catch (ServiciosException e) {
 					FacesContext context = FacesContext.getCurrentInstance();
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "ERROR");
@@ -105,9 +113,18 @@ public class ModificarFenomeno implements Serializable{
 		this.telefono = telefono;
 	}
 
+	
+	public String getCodigoBusqueda() {
+		return codigoBusqueda;
+	}
+
+
+	public void setCodigoBusqueda(String codigoBusqueda) {
+		this.codigoBusqueda = codigoBusqueda;
+	}
 
 	public String busquedaPorCodigo() {
-		return "/modificarFenomeno.xhtml?faces-redirect=true&codigo=" + this.codigo;
+		return "/pages/modificarFenomeno.xhtml?faces-redirect=true&codigo=" + this.codigo;
 	}
 	
 	public String modificarFenomeno() {
@@ -126,7 +143,7 @@ public class ModificarFenomeno implements Serializable{
 			context.addMessage("", message);
 			context.getExternalContext().getFlash().setKeepMessages(true);
 			        
-		} catch (ServiciosException | NoSuchAlgorithmException e) {
+		} catch (ServiciosException  e) {
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "ERROR");
 			context.addMessage("", message);

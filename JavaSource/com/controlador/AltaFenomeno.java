@@ -1,6 +1,6 @@
 package com.controlador;
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -80,7 +80,7 @@ public class AltaFenomeno implements Serializable {
 			
 	      
 	        
-		} catch (ServiciosException | NoSuchAlgorithmException e) {
+		} catch (ServiciosException  e) {
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "ERROR");
 			context.addMessage("", message);

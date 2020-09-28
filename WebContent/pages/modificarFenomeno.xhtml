@@ -16,13 +16,13 @@
  
         <p:tabMenu activeIndex="2">
         
-            <p:menuitem value="Inicio" outcome="listarfenomeno" >
+            <p:menuitem value="Inicio" outcome="listarFenomeno" >
                 <f:param name="i" value="0" />
             </p:menuitem>
-            <p:menuitem value="Crear Fenomeno" outcome="altafenomeno" >
+            <p:menuitem value="Crear Fenomeno" outcome="altaFenomeno" >
                 <f:param name="i" value="1" />
             </p:menuitem>
-            <p:menuitem value="Modificar Fenomeno" outcome="modificarfenomeno" >
+            <p:menuitem value="Actualizar Fenomeno" outcome="modificarFenomeno" >
                 <f:param name="i" value="2" />
             </p:menuitem>
             <p:menuitem value="Eliminar Fenomeno" outcome="eliminarFenomeno" >
@@ -37,11 +37,11 @@
     <p:panel id="panel" header="Busqueda por codigo">
         
         <h:panelGrid columns="3" cellpadding="5">
-            <p:outputLabel for="codigo a busacar" value="Codigo:" />
-            <p:inputText id="codigo" value="#{modificarfenomeno.codigoBusqueda}" required="true" label="Codigo">
+            <p:outputLabel for="codigo_busqueda" value="Codigo:" />
+            <p:inputText id="codigo_busqueda" value="#{modificarfenomeno.codigoBusqueda}" required="true" label="Codigo">
                 <f:validateBean />
             </p:inputText>
-            <p:message for="codigor"  />
+            <p:message for="codigo_busqueda"  />
         </h:panelGrid>
         <p:commandButton value="Buscar" update="panel" action="#{modificarfenomeno.busquedaPorCodigo}" icon="pi pi-check" />
     </p:panel>
@@ -60,12 +60,6 @@
            		 <p:growl id="messages" showDetail="true"/>	
             	
             	  <p:messages />
-            	  
-            	  <div style="padding: 10px;">
-                    <p:outputLabel value="ID" style="font-weight: bold;" />
-                    <p:inputText id="codigo" required="true" value="#{modificarfenomeno.codigo}"  style="width: 100%;" readonly= "#{facesContext.renderResponse}" />
-                    <p:message for="@previous" />
-                </div>
             	
             	
                 <div style="padding: 10px;">

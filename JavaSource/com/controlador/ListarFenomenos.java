@@ -14,7 +14,7 @@ import com.negocio.GestionFenomenoBean;
 
 
 
-@Named("listarFenomenos")
+@Named("listarfenomenos")
 @ConversationScoped	
 public class ListarFenomenos implements Serializable{
 
